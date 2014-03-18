@@ -1,0 +1,30 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+#define RGBCOLOR(R,G,B) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1]
+#define RGBACOLOR(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+
+//#define kBackgroundColor     RGBCOLOR(206, 34, 34)    //背景色
+
+#define kGridRedColor        RGBCOLOR(218, 56, 43)      //深红     ---所有红
+#define kWeekLabel           RGBCOLOR(225, 96, 85)   //周的背景色  ----浅红
+#define kDarkGrayColor       RGBCOLOR(46, 53, 75)    //本月可选日期颜色  ---深蓝色
+#define kDateLabelColor      RGBCOLOR(94, 127, 220)  //tool日期颜色
+#define kTextWhiteColor      RGBCOLOR(249, 249, 249)    //选中的的日期颜色 ---所有白
+#define KTintLineColor       RGBCOLOR(200, 199, 205)  //浅色灰线的颜色 背景色
+#define KDarkLineColor       RGBCOLOR(127, 127, 127)  //深色灰线的颜色 背景色
+#define kGrayColor           RGBCOLOR(189, 191, 199) //不可选的日期颜色
+#define kbackgroundGrayClor  RGBCOLOR(248, 248, 248) //深灰背景 > 其它月份的字的背景色
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "NSDate+Convenience.h"
+#endif
