@@ -1,15 +1,19 @@
-/*
- * Copyright (c) 2009 Keith Lazuka
- * License: http://www.opensource.org/licenses/mit-license.html
- */
+//
+//  HNATileView.m
+//  HNACalendarChoice
+//
+//  Created by Curry on 14-3-20.
+//  Copyright (c) 2014年 HNACalendarChoice. All rights reserved.
+//
 
-#import "KalTileView.h"
-#import "KalPrivate.h"
+#import "HNATileView.h"
+#import "UIViewAdditions.h"
+#import "NSDateAdditions.h"
 #import <CoreText/CoreText.h>
 
 extern const CGSize kTileSize;
 
-@implementation KalTileView
+@implementation HNATileView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -31,9 +35,9 @@ extern const CGSize kTileSize;
     CGFloat fontSize = 17;
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:fontSize];
     UIColor *textColor = nil;
-
+    
     CGContextSelectFont(ctx, [font.fontName cStringUsingEncoding:NSUTF8StringEncoding], fontSize, kCGEncodingMacRoman);
-
+    
     if (self.isDisable) {
         textColor = kGrayColor;
     } else if (self.belongsToAdjacentMonth) {
@@ -48,67 +52,63 @@ extern const CGSize kTileSize;
             textColor = kGridRedColor;
         }
     }
-        //->判断是否为假期
-    if (self.isVacation) {
-        UIImage *vacationImage = [UIImage imageNamed:@"kal_tile_selected.png"];
-        [vacationImage drawInRect:CGRectMake(2.f, 2.f, 15.f, 15.f)];
-    }
     
-    if (self.state == KalTileStateHighlighted || self.state == KalTileStateSelected) {
-        UIImage *image = [UIImage imageNamed:@"kal_tile_selected.png"];
+    if (self.state == HNATileStateHighlighted || self.state == HNATileStateSelected) {
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_selected.png"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         [image drawInRect:frame];
         textColor = kTextWhiteColor;
         if (self.isToday) {
-            image = [UIImage imageNamed:@"kal_tile_selected_today.png"];
+            image = [UIImage imageNamed:@"HNA_tile_selected_today.png"];
             textColor = kGridRedColor;
         }
-    } else if (self.state == KalTileStateLeftEnd) {
-        UIImage *image = [UIImage imageNamed:@"kal_tile_range_left.png"];
+    } else if (self.state == HNATileStateLeftEnd) {
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_range_left.png"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         [image drawInRect:frame];
         textColor = kTextWhiteColor;
         if (self.isToday) {
-            image = [UIImage imageNamed:@"kal_tile_range_left_today.png"];
+            image = [UIImage imageNamed:@"HNA_tile_range_left_today.png"];
             textColor = kTextWhiteColor;
         }
-    } else if (self.state == KalTileStateRightEnd) {
-        UIImage *image = [UIImage imageNamed:@"kal_tile_range_right.png"];
+    } else if (self.state == HNATileStateRightEnd) {
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_range_right.png"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         [image drawInRect:frame];
         textColor = kTextWhiteColor;
         if (self.isToday) {
-            image = [UIImage imageNamed:@"kal_tile_range_right_today.png"];
+            image = [UIImage imageNamed:@"HNA_tile_range_right_today.png"];
             textColor = kTextWhiteColor;
         }
-    } else if (self.state == KalTileStateInRange) {
-        UIImage *image = [UIImage imageNamed:@"kal_tile_range.png"];
+    } else if (self.state == HNATileStateInRange) {
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_range.png"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         textColor = kTextWhiteColor;
+        [image drawInRect:frame];
+    }
+    
+    //判断是否为节假日
+    if (self.isVacation) {
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_selected.png"];
+        CGRect frame = CGRectMake(0, 0, 10, 10);
         [image drawInRect:frame];
     }
     
     NSUInteger n = [self.date day];
     NSString *dayText = [NSString stringWithFormat:@"%lu", (unsigned long)n];
-    if (self.isToday)
-    {
-//        dayText = NSLocalizedString(@"Today", @"");
-    }
     CGSize textSize = [dayText sizeWithFont:font];
     CGFloat textX, textY;
     textX = roundf(0.5f * (kTileSize.width - textSize.width));
     textY = roundf(0.5f * (kTileSize.height - textSize.height));
     [textColor setFill];
     [dayText drawAtPoint:CGPointMake(textX, textY) withFont:font];
-    
-    
 }
 
 - (void)resetState
@@ -120,8 +120,8 @@ extern const CGSize kTileSize;
     self.frame = frame;
     
     self.date = nil;
-    _type = KalTileTypeRegular;
-    self.state = KalTileStateNone;
+    _type = HNATileTypeRegular;
+    self.state = HNATileStateNone;
 }
 
 - (void)setDate:(NSDate *)aDate
@@ -134,7 +134,7 @@ extern const CGSize kTileSize;
     [self setNeedsDisplay];
 }
 
-- (void)setState:(KalTileState)state
+- (void)setState:(HNATileState)state
 {
     if (_state != state) {
         _state = state;
@@ -142,7 +142,7 @@ extern const CGSize kTileSize;
     }
 }
 
-- (void)setType:(KalTileType)tileType
+- (void)setType:(HNATileType)tileType
 {
     if (_type != tileType) {
         _type = tileType;
@@ -150,12 +150,10 @@ extern const CGSize kTileSize;
     }
 }
 
-- (BOOL)isToday { return self.type & KalTileTypeToday; }
-- (BOOL)isFirst { return self.type & KalTileTypeFirst; }
-- (BOOL)isLast { return self.type & KalTileTypeLast; }
-- (BOOL)isDisable { return self.type & KalTileTypeDisable; }
-- (BOOL)isVacation { return self.type & KalTileTypeVacation; }
-
-- (BOOL)belongsToAdjacentMonth { return self.type & KalTileTypeAdjacent; }
+- (BOOL)isToday { return self.type & HNATileTypeToday; }
+- (BOOL)isFirst { return self.type & HNATileTypeFirst; }
+- (BOOL)isLast { return self.type & HNATileTypeLast; }
+- (BOOL)isDisable { return self.type & HNATileTypeDisable; }
+- (BOOL)belongsToAdjacentMonth { return self.type & HNATileTypeAdjacent; }
 
 @end

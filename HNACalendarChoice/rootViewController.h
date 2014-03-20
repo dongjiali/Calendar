@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KalViewController.h"
-@interface rootViewController : UIViewController<SelectedDateDelegate>
+@interface rootViewController : UIViewController
 
 @end

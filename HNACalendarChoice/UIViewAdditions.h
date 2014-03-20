@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (KalAdditions)
+@interface UIView (HNAAdditions)
 
 @property(nonatomic) CGFloat left;
 @property(nonatomic) CGFloat right;

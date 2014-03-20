@@ -1,11 +1,15 @@
-/*
- * Copyright (c) 2009 Keith Lazuka
- * License: http://www.opensource.org/licenses/mit-license.html
- */
+//
+//  HNADatePicker.m
+//  HNACalendarChoice
+//
+//  Created by Curry on 14-3-20.
+//  Copyright (c) 2014年 HNACalendarChoice. All rights reserved.
+//
 
-#import "KalViewController.h"
-#import "KalLogic.h"
-#import "KalPrivate.h"
+#import "HNADatePicker.h"
+#import "HNALogic.h"
+#import "UIViewAdditions.h"
+#import "NSDateAdditions.h"
 
 #define PROFILER 0
 #if PROFILER
@@ -26,26 +30,16 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
 }
 #endif
 
-NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotification";
-
-@interface KalViewController ()
-
-- (KalView*)calendarView;
+@interface HNADatePicker ()
+{
+    HNALogic *logic;
+}
 @end
 
-@implementation KalViewController
+@implementation HNADatePicker
 
-- (void)setSelectedDate:(NSDate *)selectedDate
-{
-    _selectedDate = selectedDate;
-    self.calendarView.gridView.beginDate = _selectedDate;
-    [self showAndSelectDate:_selectedDate];
-}
 
-- (void)setVacationDate:(NSArray *)vacationDate
-{
-    _vacationDate = vacationDate;
-}
+#pragma -mark - init begin end max min Date
 
 - (void)setBeginDate:(NSDate *)beginDate
 {
@@ -58,38 +52,38 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 {
     _endDate = endDate;
     self.calendarView.gridView.endDate = _endDate;
-    [(KalView *)self.view redrawEntireMonth];
+    [(HNADateView *)self.view redrawEntireMonth];
 }
 
 - (void)setMinAvailableDate:(NSDate *)minAvailableDate
 {
     _minAvailableDate = minAvailableDate;
-    ((KalView *)self.view).gridView.minAvailableDate = minAvailableDate;
-    [(KalView *)self.view redrawEntireMonth];
+    ((HNADateView *)self.view).gridView.minAvailableDate = minAvailableDate;
+    [(HNADateView *)self.view redrawEntireMonth];
 }
 
 - (void)setMaxAVailableDate:(NSDate *)maxAVailableDate
 {
     _maxAVailableDate = maxAVailableDate;
-    ((KalView *)self.view).gridView.maxAVailableDate = maxAVailableDate;
-    [(KalView *)self.view redrawEntireMonth];
+    ((HNADateView *)self.view).gridView.maxAVailableDate = maxAVailableDate;
+    [(HNADateView *)self.view redrawEntireMonth];
 }
 
-#pragma mark- KalLogic init
+#pragma mark- HNALogic init
 
-- (id)initWithSelectionMode:(KalSelectionMode)selectionMode dateType:(KalSelDateType)selectedDateType;
+- (id)initWithSelectionMode:(HNASelectionMode)selectionMode dateType:(HNASelDateType)selectedDateType;
 {
     if ((self = [super init])) {
         
-        logic = [[KalLogic alloc] initForDate:[NSDate date]];
+        logic = [[HNALogic alloc] initForDate:[NSDate date]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(significantTimeChangeOccurred) name:UIApplicationSignificantTimeChangeNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:KalDataSourceChangedNotification object:nil];
+
         self.selectionMode = selectionMode;
         self.selectedDateType = selectedDateType;
         //->设置最小的选择是哪天  往前5天
-        //->kal.minAvailableDate = [NSDate dateStartOfDay:[[NSDate date] offsetDay:-5]];
+        //->HNA.minAvailableDate = [NSDate dateStartOfDay:[[NSDate date] offsetDay:-5]];
         self.minAvailableDate = [NSDate dateStartOfDay:[NSDate date]];
-        //->设置最大能选择的天是哪天  往后+365天
+        //->设置最大能选择的天是哪天  往后6个月
         self.maxAVailableDate = [self.minAvailableDate offsetDay:31 * 6];
     }
     return self;
@@ -97,25 +91,42 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 
 - (id)init
 {
-    return [self initWithSelectionMode:KalSelectionModeSingle dateType:KalSelDateTypeAirLine];
+    return [self initWithSelectionMode:HNASelectionModeSingle dateType:HNASelDateTypeAirLine];
 }
-//初始化去程和返程laebel日期
-- (void)setTripLabelText:(KalSelectionMode)selectionMode
-{
 
-    if (self.selectionMode == KalSelectionModeSingle) {
-        [(KalView *)self.view setBeginDateLabelText:[self changeDateType:_selectedDate]];
-        [(KalView *)self.view setEndDateLabelText:@"您是单程哦"];
-        [self.selectDateDelegate requestDate:_selectedDate endDate:nil];
+- (void)requestDate:(DatePieckerDoneBlock)block
+{
+    _datePickerblock = [block copy];
+}
+
+//初始化起始和终止laebel日期
+- (void)setTripLabelText:(HNASelectionMode)selectionMode
+{
+    //日期转换 转成2014.12.12 形式
+        NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];  //实例化一个NSDateFormatter对象
+        [dateFormat setDateFormat:@"yyyy.MM.dd"];//设定时间格式,这里可以设置成自己需要的格式
+        NSString *startDate,*endDate,*firstDate,*secondDate;
+    if (self.selectionMode == HNASelectionModeSingle) {
+        startDate = [dateFormat stringFromDate:_beginDate];
+        endDate = @"";
+        [dateFormat setDateFormat:@"yyyy年MM月dd日          eeee"];
+        firstDate = [dateFormat stringFromDate:_beginDate];
+        secondDate = @"";
     }else
     {
-        [(KalView *)self.view setBeginDateLabelText:[self changeDateType:_beginDate]];
-        [(KalView *)self.view setEndDateLabelText:[self changeDateType:_endDate]];
-        [self.selectDateDelegate requestDate:_beginDate endDate:_endDate];
+        startDate = [dateFormat stringFromDate:_beginDate];
+        endDate = [dateFormat stringFromDate:_endDate];
+        [dateFormat setDateFormat:@"yyyy年MM月dd日          eeee"];
+        firstDate = [dateFormat stringFromDate:_beginDate];
+        secondDate = [dateFormat stringFromDate:_endDate];
     }
+    [(HNADateView *)self.view setBeginDateLabelText:startDate];
+    [(HNADateView *)self.view setEndDateLabelText:endDate];
+    
+    _datePickerblock(firstDate,secondDate);
 }
 
-- (KalView*)calendarView { return (KalView*)self.view; }
+- (HNADateView*)calendarView { return (HNADateView*)self.view; }
 
 - (void)significantTimeChangeOccurred
 {
@@ -123,11 +134,11 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 }
 
 // -----------------------------------------
-#pragma mark- KalViewDelegate protocol
+#pragma mark- HNADateViewDelegate protocol
 
 - (void)didSelectDate:(NSDate *)date
 {
-    _selectedDate = date;
+    _beginDate = date;
     [self setTripLabelText:self.selectionMode];
 }
 
@@ -158,22 +169,13 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
         self.preaSuperView.alpha = 1.0;
     } completion:^(BOOL finished) {
         self.preaSuperView.userInteractionEnabled = YES;
-        [(KalView *)self.view stopshowAnimationView];
+        [(HNADateView *)self.view stopshowAnimationView];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationSignificantTimeChangeNotification object:nil];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:KalDataSourceChangedNotification object:nil];
         //改变状态栏颜色
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         //把view从window中移除
         [self.view removeFromSuperview];
     }];
-}
-
-//日期转换 转成2014.12.12 形式
-- (NSString *)changeDateType:(NSDate *)date
-{
-    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];  //实例化一个NSDateFormatter对象
-    [dateFormat setDateFormat:@"yyyy.MM.dd"];//设定时间格式,这里可以设置成自己需要的格式
-    return [dateFormat stringFromDate:date];
 }
 
 // ---------------------------------------
@@ -210,13 +212,13 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    KalView *kalView = [[KalView alloc] initWithFrame:[[UIScreen mainScreen] bounds] delegate:self logic:logic];
-    kalView.viewSelectionMode = self.selectionMode;
-    kalView.gridView.selectionMode = self.selectionMode;
-    kalView.selectedDateType = self.selectedDateType;
-    kalView.gridView.selectedDateType = self.selectedDateType;
-    [kalView markVacationForDates:self.vacationDate];
-    self.view = kalView;
+    HNADateView *hnaDateView = [[HNADateView alloc] initWithFrame:[[UIScreen mainScreen] bounds] delegate:self logic:logic];
+    hnaDateView.viewSelectionMode = self.selectionMode;
+    hnaDateView.gridView.selectionMode = self.selectionMode;
+    hnaDateView.selectedDateType = self.selectedDateType;
+    hnaDateView.gridView.selectedDateType = self.selectedDateType;
+    [hnaDateView setDateLabelShowType];
+    self.view = hnaDateView;
     self.view.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);
 }
 
@@ -229,6 +231,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 {
     [super viewDidAppear:animated];
 }
+
 //设置父VIEW
 - (void)addPreaSuperView:(UIView *)preaSuperView{
     self.preaSuperView = preaSuperView;
@@ -242,7 +245,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
     //把view添加到window中
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
     [keyWindow addSubview:self.view];
-//    [self setTripLabelText:self.selectionMode];
+    //    [self setTripLabelText:self.selectionMode];
     [UIView animateWithDuration:0.3 animations:^{
         self.view.frame = CGRectMake(0, -10, self.view.frame.size.width, self.view.frame.size.height);
         self.preaSuperView.transform = CGAffineTransformMakeScale(0.90, 0.90);
@@ -260,7 +263,6 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationSignificantTimeChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:KalDataSourceChangedNotification object:nil];
 }
 
 @end

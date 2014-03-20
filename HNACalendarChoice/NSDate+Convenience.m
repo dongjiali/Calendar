@@ -51,6 +51,7 @@
                                       toDate:self options:0];
 }
 
+//判断是否今天
 - (BOOL)isToday
 {
     return [[NSDate dateStartOfDay:self] isEqualToDate:[NSDate dateStartOfDay:[NSDate date]]];

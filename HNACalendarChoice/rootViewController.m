@@ -8,15 +8,11 @@
 
 #import "rootViewController.h"
 #import "AppDelegate.h"
-#import "Kal.h"
 #import "NSDate+Convenience.h"
-#import <EventKit/EventKit.h>
-#import <EventKitUI/EventKitUI.h>
-
+#import "HNADatePicker.h"
 @interface rootViewController ()
 {
-    KalViewController *kalViewController;
-    id dataSource;
+    HNADatePicker *hnaDatePicker;
     UILabel *firstlabel;
     UILabel *secondlabel;
 }
@@ -29,25 +25,26 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        //假期数据数组
-        NSArray *vacations = [NSArray arrayWithObjects:@"2014-03-08",@"2014-03-09",@"2014-03-10", nil];
+
 //#define Single
 #ifdef Single
-        kalViewController = [[KalViewController alloc] initWithSelectionMode:KalSelectionModeSingle];
-        kalViewController.vacationDate = vacations;
-        kalViewController.selectedDate = [NSDate dateStartOfDay:[NSDate date]];
+        hnaDatePicker = [[HNADatePicker alloc] initWithSelectionMode:HNASelectionModeSingle dateType:HNASelDateTypeAirLine];
+        hnaDatePicker.beginDate = [NSDate dateStartOfDay:[NSDate date]];
 #else
-        kalViewController = [[KalViewController alloc] initWithSelectionMode:KalSelectionModeRange];
+        hnaDatePicker = [[HNADatePicker alloc] initWithSelectionMode:HNASelectionModeRange dateType:HNASelDateTypeHotle];
         //-> 多选时设置的开始时间和结束时间
-        //    kal.selectedDate = [NSDate dateStartOfDay:[NSDate date]];
-        kalViewController.vacationDate = vacations;
-        kalViewController.beginDate = [NSDate dateStartOfDay:[NSDate date]];
-        kalViewController.endDate = [NSDate dateStartOfDay:[NSDate date]];
+        //    HNA.selectedDate = [NSDate dateStartOfDay:[NSDate date]];
+        hnaDatePicker.beginDate = [NSDate dateStartOfDay:[NSDate date]];
+        hnaDatePicker.endDate = [NSDate dateStartOfDay:[NSDate date]];
 #endif
-        kalViewController.selectDateDelegate = self;
-        [kalViewController addPreaSuperView:self.view];
         
+        [hnaDatePicker requestDate:^(NSString *startDate, NSString *endDate) {
+            firstlabel.text = startDate;
+            secondlabel.text = endDate;
+        }];
+        [hnaDatePicker addPreaSuperView:self.view];
         
+        //
         self.view.backgroundColor = [UIColor yellowColor];
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -58,29 +55,15 @@
         [self.view addSubview:button];
         [button addTarget:self action:@selector(selectdate:) forControlEvents:UIControlEventTouchUpInside];
         
-        firstlabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 230, 200, 20)];
+        firstlabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 230, 300, 20)];
         firstlabel.textColor = [UIColor blackColor];
         [self.view addSubview:firstlabel];
         
-        secondlabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 270, 200, 20)];
+        secondlabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 270, 300, 20)];
         [self.view addSubview:secondlabel];
         firstlabel.textColor = [UIColor blackColor];
     }
     return self;
-}
-
-- (void)requestDate:(NSDate *)startDate endDate:(NSDate *)endDate
-{
-    firstlabel.text = [self changeDateType:startDate];
-    secondlabel.text = [self changeDateType:endDate];
-}
-
-//日期转换 转成2014.12.12 形式
-- (NSString *)changeDateType:(NSDate *)date
-{
-    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];  //实例化一个NSDateFormatter对象
-    [dateFormat setDateFormat:@"yyyy.MM.dd eeee"];//设定时间格式,这里可以设置成自己需要的格式
-    return [dateFormat stringFromDate:date];
 }
 
 - (void)viewDidLoad
@@ -91,7 +74,7 @@
 
 - (void)selectdate:(id)sender
 {
-    [kalViewController showDatePickerView];
+    [hnaDatePicker showDatePickerView];
 }
 
 

@@ -113,8 +113,8 @@
   NSInteger n = [beginningOfPreviousMonth cc_numberOfDaysInMonth];
   NSInteger numPartialDays = [self numberOfDaysInPreviousPartialWeek];
   NSDateComponents *c = [beginningOfPreviousMonth cc_componentsForMonthDayAndYear];
-  for (NSInteger i = n - (numPartialDays - 1); i < n + 1; i++)
-    [days addObject:[NSDate dateForDay:i month:c.month year:c.year]];
+  for (long i = n - (numPartialDays - 1); i < n + 1; i++)
+    [days addObject:[NSDate dateForDay:(unsigned int)i month:(unsigned int)c.month year:(unsigned int)c.year]];
   
   return days;
 }
@@ -126,7 +126,7 @@
   NSUInteger numDays = [self.baseDate cc_numberOfDaysInMonth];
   NSDateComponents *c = [self.baseDate cc_componentsForMonthDayAndYear];
   for (NSInteger i = 1; i < numDays + 1; i++)
-    [days addObject:[NSDate dateForDay:i month:c.month year:c.year]];
+    [days addObject:[NSDate dateForDay:(unsigned int)i month:(unsigned int)c.month year:(unsigned int)c.year]];
   
   return days;
 }
@@ -139,7 +139,7 @@
   NSUInteger numPartialDays = [self numberOfDaysInFollowingPartialWeek];
   
   for (int i = 1; i < numPartialDays + 1; i++)
-    [days addObject:[NSDate dateForDay:i month:c.month year:c.year]];
+    [days addObject:[NSDate dateForDay:(unsigned int)i month:(unsigned int)c.month year:(unsigned int)c.year]];
   
   return days;
 }

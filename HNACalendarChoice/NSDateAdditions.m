@@ -6,7 +6,7 @@
 //
 #import "NSDateAdditions.h"
 
-@implementation NSDate (KalAdditions)
+@implementation NSDate (HNAAdditions)
 
 - (NSDate *)cc_dateByMovingToBeginningOfDay
 {

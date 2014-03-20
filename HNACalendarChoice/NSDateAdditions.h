@@ -6,7 +6,7 @@
 //
 #import <Foundation/Foundation.h>
 
-@interface NSDate (KalAdditions)
+@interface NSDate (HNAAdditions)
 
 // All of the following methods use [NSCalendar currentCalendar] to perform
 // their calculations.

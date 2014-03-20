@@ -1,7 +1,10 @@
-/* 
- * Copyright (c) 2009 Keith Lazuka
- * License: http://www.opensource.org/licenses/mit-license.html
- */
+//
+//  HNAGridView.h
+//  HNACalendarChoice
+//
+//  Created by Curry on 14-3-20.
+//  Copyright (c) 2014年 HNACalendarChoice. All rights reserved.
+//
 
 #import <UIKit/UIKit.h>
 
@@ -30,10 +33,10 @@ typedef enum {
  */
 @interface HNAGridView : UIView
 {
-  id<HNAViewDelegate> delegate;  // Assigned.
-  HNALogic *logic;
-  HNAMonthView *frontMonthView;
-  HNAMonthView *backMonthView;
+    id<HNAViewDelegate> delegate;  // Assigned.
+    HNALogic *logic;
+    HNAMonthView *frontMonthView;
+    HNAMonthView *backMonthView;
 }
 
 @property (nonatomic, assign) BOOL transitioning;
@@ -43,9 +46,7 @@ typedef enum {
 @property (nonatomic, strong) NSDate *maxAVailableDate;
 @property (nonatomic, strong) NSDate *beginDate;
 @property (nonatomic, strong) NSDate *endDate;
-
 - (id)initWithFrame:(CGRect)frame logic:(HNALogic *)logic delegate:(id<HNAViewDelegate>)delegate;
-- (void)markVacationForDates:(NSArray *)dates;
 
 // These 3 methods should be called *after* the HNALogic
 // has moved to the previous or following month.

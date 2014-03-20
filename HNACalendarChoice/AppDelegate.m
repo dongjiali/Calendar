@@ -7,17 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "Kal.h"
-#import "NSDate+Convenience.h"
-#import <EventKit/EventKit.h>
-#import <EventKitUI/EventKitUI.h>
 
 #import "rootViewController.h"
 @interface AppDelegate()
-{
-    KalViewController *kalViewController;
-    id dataSource;
-}
 
 @end
 
@@ -35,12 +27,6 @@
     [self.window makeKeyAndVisible];
 
     return YES;
-}
-
-// Action handler for the navigation bar's right bar button item.
-- (void)showAndSelectToday
-{
-    [kalViewController showAndSelectDate:[NSDate date]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
