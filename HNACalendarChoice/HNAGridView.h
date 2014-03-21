@@ -21,19 +21,9 @@ typedef enum {
 @class HNATileView, HNAMonthView, HNALogic;
 @protocol HNAViewDelegate;
 
-/*
- *    HNAGridView
- *    ------------------
- *
- *    Private interface
- *
- *  As a client of the HNA system you should not need to use this class directly
- *  (it is managed by HNAView).
- *
- */
 @interface HNAGridView : UIView
 {
-    id<HNAViewDelegate> delegate;  // Assigned.
+    id<HNAViewDelegate> delegate;
     HNALogic *logic;
     HNAMonthView *frontMonthView;
     HNAMonthView *backMonthView;
@@ -48,10 +38,10 @@ typedef enum {
 @property (nonatomic, strong) NSDate *endDate;
 - (id)initWithFrame:(CGRect)frame logic:(HNALogic *)logic delegate:(id<HNAViewDelegate>)delegate;
 
-// These 3 methods should be called *after* the HNALogic
-// has moved to the previous or following month.
+//这三个方法应称为 HNALogic之后
+//当前 之前 或之后。
 - (void)slideUp;
 - (void)slideDown;
-- (void)jumpToSelectedMonth;    // see comment on HNAView
+- (void)jumpToSelectedMonth;
 
 @end

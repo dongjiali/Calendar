@@ -19,15 +19,15 @@
     NSDateFormatter *monthAndYearFormatter;
 }
 
-@property (nonatomic, strong) NSDate *baseDate;    // The first day of the currently selected month
-@property (nonatomic, strong, readonly) NSDate *fromDate;  // The date corresponding to the tile in the upper-left corner of the currently selected month
-@property (nonatomic, strong, readonly) NSDate *toDate;    // The date corresponding to the tile in the bottom-right corner of the currently selected month
-@property (nonatomic, strong, readonly) NSArray *daysInSelectedMonth;             // array of NSDate
-@property (nonatomic, strong, readonly) NSArray *daysInFinalWeekOfPreviousMonth;  // array of NSDate
-@property (nonatomic, strong, readonly) NSArray *daysInFirstWeekOfFollowingMonth; // array of NSDate
-@property (copy, nonatomic, readonly) NSString *selectedMonthNameAndYear; // localized (e.g. "September 2010" for USA locale)
+@property (nonatomic, strong) NSDate *baseDate;                                 //当前选中的第一天
+@property (nonatomic, strong, readonly) NSDate *fromDate;  // 日期对应于日历在当前选中的左上角
+@property (nonatomic, strong, readonly) NSDate *toDate;    // 相对应的日期在当前选中的右下角
+@property (nonatomic, strong, readonly) NSArray *daysInSelectedMonth;             // 当前月
+@property (nonatomic, strong, readonly) NSArray *daysInFinalWeekOfPreviousMonth;  // 上一月
+@property (nonatomic, strong, readonly) NSArray *daysInFirstWeekOfFollowingMonth; // 下一月
+@property (copy, nonatomic, readonly) NSString *selectedMonthNameAndYear;
 
-- (id)initForDate:(NSDate *)date; // designated initializer.
+- (id)initForDate:(NSDate *)date; // 初始化
 
 - (void)retreatToPreviousMonth;
 - (void)advanceToFollowingMonth;

@@ -33,11 +33,15 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
 @interface HNADatePicker ()
 {
     HNALogic *logic;
+    //初始化选择日期的类型
+    HNASelectionMode _selectionMode;
+    HNASelDateType _selectedDateType;
 }
+@property(nonatomic,strong) UIView *_preaSuperView;
 @end
 
 @implementation HNADatePicker
-
+@synthesize _preaSuperView = _preaSuperView;
 
 #pragma -mark - init begin end max min Date
 
@@ -76,12 +80,9 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
     if ((self = [super init])) {
         
         logic = [[HNALogic alloc] initForDate:[NSDate date]];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(significantTimeChangeOccurred) name:UIApplicationSignificantTimeChangeNotification object:nil];
-
-        self.selectionMode = selectionMode;
-        self.selectedDateType = selectedDateType;
-        //->设置最小的选择是哪天  往前5天
-        //->HNA.minAvailableDate = [NSDate dateStartOfDay:[[NSDate date] offsetDay:-5]];
+        _selectionMode = selectionMode;
+        _selectedDateType = selectedDateType;
+        //->设置最小的选择是今天
         self.minAvailableDate = [NSDate dateStartOfDay:[NSDate date]];
         //->设置最大能选择的天是哪天  往后6个月
         self.maxAVailableDate = [self.minAvailableDate offsetDay:31 * 6];
@@ -106,7 +107,7 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
         NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];  //实例化一个NSDateFormatter对象
         [dateFormat setDateFormat:@"yyyy.MM.dd"];//设定时间格式,这里可以设置成自己需要的格式
         NSString *startDate,*endDate,*firstDate,*secondDate;
-    if (self.selectionMode == HNASelectionModeSingle) {
+    if (_selectionMode == HNASelectionModeSingle) {
         startDate = [dateFormat stringFromDate:_beginDate];
         endDate = @"";
         [dateFormat setDateFormat:@"yyyy年MM月dd日          eeee"];
@@ -133,20 +134,20 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
     [[self calendarView] jumpToSelectedMonth];
 }
 
-// -----------------------------------------
+
 #pragma mark- HNADateViewDelegate protocol
 
 - (void)didSelectDate:(NSDate *)date
 {
     _beginDate = date;
-    [self setTripLabelText:self.selectionMode];
+    [self setTripLabelText:_selectionMode];
 }
 
 - (void)didSelectBeginDate:(NSDate *)beginDate endDate:(NSDate *)endDate
 {
     _beginDate = beginDate;
     _endDate = endDate;
-    [self setTripLabelText:self.selectionMode];
+    [self setTripLabelText:_selectionMode];
 }
 
 - (void)showPreviousMonth
@@ -165,12 +166,11 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
 {
     [UIView animateWithDuration:0.3 animations:^{
         self.view.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);
-        self.preaSuperView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-        self.preaSuperView.alpha = 1.0;
+        _preaSuperView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        _preaSuperView.alpha = 1.0;
     } completion:^(BOOL finished) {
-        self.preaSuperView.userInteractionEnabled = YES;
+        _preaSuperView.userInteractionEnabled = YES;
         [(HNADateView *)self.view stopshowAnimationView];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationSignificantTimeChangeNotification object:nil];
         //改变状态栏颜色
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         //把view从window中移除
@@ -178,7 +178,7 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
     }];
 }
 
-// ---------------------------------------
+
 #pragma mark -
 
 - (void)showAndSelectDate:(NSDate *)date
@@ -203,7 +203,7 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
 #endif
 }
 
-// -----------------------------------------------------------------------------------
+
 #pragma mark- UIViewController
 
 - (void)loadView
@@ -213,10 +213,10 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
     }
     
     HNADateView *hnaDateView = [[HNADateView alloc] initWithFrame:[[UIScreen mainScreen] bounds] delegate:self logic:logic];
-    hnaDateView.viewSelectionMode = self.selectionMode;
-    hnaDateView.gridView.selectionMode = self.selectionMode;
-    hnaDateView.selectedDateType = self.selectedDateType;
-    hnaDateView.gridView.selectedDateType = self.selectedDateType;
+    hnaDateView.viewSelectionMode = _selectionMode;
+    hnaDateView.gridView.selectionMode = _selectionMode;
+    hnaDateView.selectedDateType = _selectedDateType;
+    hnaDateView.gridView.selectedDateType = _selectedDateType;
     [hnaDateView setDateLabelShowType];
     self.view = hnaDateView;
     self.view.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height);
@@ -234,7 +234,7 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
 
 //设置父VIEW
 - (void)addPreaSuperView:(UIView *)preaSuperView{
-    self.preaSuperView = preaSuperView;
+    _preaSuperView = preaSuperView;
 }
 
 //弹出VIEW
@@ -248,21 +248,14 @@ void mach_absolute_difference(uint64_t end, uint64_t start, struct timespec *tp)
     //    [self setTripLabelText:self.selectionMode];
     [UIView animateWithDuration:0.3 animations:^{
         self.view.frame = CGRectMake(0, -10, self.view.frame.size.width, self.view.frame.size.height);
-        self.preaSuperView.transform = CGAffineTransformMakeScale(0.90, 0.90);
-        self.preaSuperView.alpha = 0.6;
-        self.preaSuperView.userInteractionEnabled = NO;
+        _preaSuperView.transform = CGAffineTransformMakeScale(0.90, 0.90);
+        _preaSuperView.alpha = 0.6;
+        _preaSuperView.userInteractionEnabled = NO;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.2 animations:^{
             self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         }];
     }];
-}
-
-#pragma mark -
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationSignificantTimeChangeNotification object:nil];
 }
 
 @end

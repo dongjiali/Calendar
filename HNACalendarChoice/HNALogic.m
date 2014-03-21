@@ -97,15 +97,8 @@
 
 - (NSUInteger)numberOfDaysInFollowingPartialWeek
 {
-    //  NSDateComponents *c = [self.baseDate cc_componentsForMonthDayAndYear];
-    //  c.day = [self.baseDate cc_numberOfDaysInMonth];
-    //    NSLog(@"%d",c.day);
-    //  NSDate *lastDayOfTheMonth = [[NSCalendar currentCalendar] dateFromComponents:c];
     //->设置最下月的显示天数，一共6行 每行7天 42-当月和前月
     NSInteger num = 42 - self.daysInSelectedMonth.count - self.daysInFinalWeekOfPreviousMonth.count;
-    //    NSInteger num = 7 - [lastDayOfTheMonth cc_weekday];
-    //    if (num == 0)
-    //        num = 7;
     return num;
 }
 

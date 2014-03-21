@@ -30,9 +30,9 @@
 }
 @end
 
-static const CGFloat HeaderHeight = 74.f;
+static const CGFloat HeaderHeight = 64.f;
 static const CGFloat ToolHeight = 44.f;
-static const CGFloat ContentViewHeight = 45 * 6 - 25;
+static const CGFloat ContentViewHeight = 44 * 6;
 @implementation HNADateView
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<HNAViewDelegate>)theDelegate logic:(HNALogic *)theLogic
@@ -113,7 +113,7 @@ static const CGFloat ContentViewHeight = 45 * 6 - 25;
     const CGFloat kMonthLabelWidth = 100.0f;
     const CGFloat kHeaderVerticalAdjust = 0.f;
     const CGFloat MonthLabelHeight = 44.0f;
-    // Draw the selected month name centered and at the top of the view
+    // 绘制所选月集中和顶部的视图名称
     CGRect monthLabelFrame = CGRectMake((self.width - kMonthLabelWidth)/2,
                                         kHeaderVerticalAdjust,
                                         kMonthLabelWidth,
@@ -129,11 +129,11 @@ static const CGFloat ContentViewHeight = 45 * 6 - 25;
     UIView *whiteLineView = [[UIView alloc]initWithFrame:CGRectMake(0, 43, self.width, 1)];
     whiteLineView.backgroundColor = kTextWhiteColor;
     [headerView addSubview:whiteLineView];
-    
-    // Add column labels for each weekday (adjusting based on the current locale's first weekday)
+
+    // 添加列标签为每个工作日调整基于当前语言环境的第一个工作日
     NSArray *weekdayNames = [[[NSDateFormatter alloc] init] veryShortStandaloneWeekdaySymbols];
     static CGFloat width = 46.0f;
-    static CGFloat height = 30.0f;
+    static CGFloat height = 20.0f;
     for (int i = 0 ;i < 7 ;i++) {
         CGRect weekdayFrame = CGRectMake(i * (width), 44, width, height);
         UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:weekdayFrame];
@@ -148,18 +148,14 @@ static const CGFloat ContentViewHeight = 45 * 6 - 25;
 
 - (void)addSubviewsToContentView:(UIView *)contentView
 {
-    // Both the tile grid and the list of events will automatically lay themselves
-    // out to fit the # of weeks in the currently displayed month.
-    // So the only part of the frame that we need to specify is the width.
+
     CGRect fullWidthAutomaticLayoutFrame = CGRectMake(0.f, 0.f, self.width, 0.f);
     
-    // The tile grid (the calendar body)
     self.gridView = [[HNAGridView alloc] initWithFrame:fullWidthAutomaticLayoutFrame logic:logic delegate:self.delegate];
 
     [self.gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
     [contentView addSubview:self.gridView];
     
-    // Trigger the initial KVO update to finish the contentView layout
     [self.gridView sizeToFit];
 }
 
@@ -336,10 +332,10 @@ static const CGFloat ContentViewHeight = 45 * 6 - 25;
 
 - (void)startAnimationView
 {
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         if (monthSelectView.frame.size.height == 0) {
             monthSelectView.frame = CGRectMake(0, selfheaderView.frame.origin.y + 44, self.width, ContentViewHeight + 2 *ToolHeight);
-            [monthSelectView setAlpha:0.96];
+            [monthSelectView setAlpha:0.95];
         }
         else{
             [self stopshowAnimationView];
@@ -357,11 +353,10 @@ static const CGFloat ContentViewHeight = 45 * 6 - 25;
     [monthSelectView setAlpha:0.7];
 }
 
-//日期转换 转成月 形式
 - (NSString *)changeDateType:(NSDate *)date
 {
-    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];  //实例化一个NSDateFormatter对象
-    [dateFormat setDateFormat:@"yyyy.MM"];//设定时间格式,这里可以设置成自己需要的格式
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init]; 
+    [dateFormat setDateFormat:@"yyyy.MM"];
     return [dateFormat stringFromDate:date];
 }
 

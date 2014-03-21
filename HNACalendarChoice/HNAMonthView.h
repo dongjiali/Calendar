@@ -18,7 +18,7 @@
 
 @property (nonatomic) NSUInteger numWeeks;
 @property (nonatomic ,strong) NSMutableArray *vacationArray;
-- (id)initWithFrame:(CGRect)rect; // designated initializer
+- (id)initWithFrame:(CGRect)rect;
 - (void)showDates:(NSArray *)mainDates leadingAdjacentDates:(NSArray *)leadingAdjacentDates trailingAdjacentDates:(NSArray *) trailingAdjacentDates minAvailableDate:(NSDate *)minAvailableDate maxAvailableDate:(NSDate *)maxAvailableDate;
 - (HNATileView *)firstTileOfMonth;
 - (HNATileView *)tileForDate:(NSDate *)date;

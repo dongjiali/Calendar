@@ -66,7 +66,6 @@ static NSString *kSlideAnimationId = @"HNASwitchMonths";
     [self removeRanges];
     
     if (!_endDate || [_endDate isEqualToDate:self.beginDate]) {
-        //->
         //-> 多选时选择begin end是同一天设置成选择
         realBeginDate = self.beginDate;
         realEndDate = self.endDate;
@@ -259,7 +258,7 @@ static NSString *kSlideAnimationId = @"HNASwitchMonths";
 {
     backMonthView.hidden = NO;
     self.userInteractionEnabled = NO;
-    // set initial positions before the slide
+    // 设置初始位置之前的幻灯slide
     if (direction == SLIDE_UP) {
         backMonthView.top = keepOneRow
         ? frontMonthView.bottom - kTileSize.height
@@ -271,10 +270,10 @@ static NSString *kSlideAnimationId = @"HNASwitchMonths";
     } else {
         backMonthView.top = 0.f;
     }
-    // trigger the slide animation
+    // 月跳转动画
     [UIView beginAnimations:kSlideAnimationId context:NULL]; {
         [UIView setAnimationsEnabled:direction!=SLIDE_NONE];
-        [UIView setAnimationDuration:0.3];
+        [UIView setAnimationDuration:0.4];
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
         
@@ -300,11 +299,6 @@ static NSString *kSlideAnimationId = @"HNASwitchMonths";
        trailingAdjacentDates:logic.daysInFirstWeekOfFollowingMonth
             minAvailableDate:self.minAvailableDate
             maxAvailableDate:self.maxAVailableDate];
-    
-    // At this point, the calendar logic has already been advanced or retreated to the
-    // following/previous month, so in order to determine whether there are
-    // any cells to keep, we need to check for a partial week in the month
-    // that is sliding offscreen.
     
     BOOL keepOneRow = (direction == SLIDE_UP && [logic.daysInFinalWeekOfPreviousMonth count] > 0)
     || (direction == SLIDE_DOWN && [logic.daysInFirstWeekOfFollowingMonth count] > 0);

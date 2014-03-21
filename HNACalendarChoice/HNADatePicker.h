@@ -15,21 +15,20 @@ typedef void (^DatePieckerDoneBlock)(NSString *startDate,NSString *endDate);
     DatePieckerDoneBlock _datePickerblock;
 }
 
+//初始化起始和终止时间
 @property (nonatomic, strong) NSDate *beginDate;
 @property (nonatomic, strong) NSDate *endDate;
-@property (nonatomic, assign) HNASelectionMode selectionMode;
-@property (nonatomic, assign) HNASelDateType selectedDateType;
+//可选择的最小时间和最时间度
 @property (nonatomic, strong) NSDate *minAvailableDate;
 @property (nonatomic, strong) NSDate *maxAVailableDate;
-@property (nonatomic, strong) UIView *preaSuperView;
 
+//初始化
 - (id)initWithSelectionMode:(HNASelectionMode)selectionMode dateType:(HNASelDateType)selectedDateType;
-
 - (void)showAndSelectDate:(NSDate *)date;
-// show date picker view in supperview
+//弹出显示日历
 - (void)showDatePickerView;
-//add super view
+//设置添加到父试图
 - (void)addPreaSuperView:(UIView *)preaSuperView;
-//daterequest
+//反回数据
 - (void)requestDate:(DatePieckerDoneBlock)block;
 @end
