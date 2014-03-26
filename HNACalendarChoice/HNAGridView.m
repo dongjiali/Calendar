@@ -275,7 +275,7 @@ static NSString *kSlideAnimationId = @"HNASwitchMonths";
     // trigger the slide animation
     [UIView beginAnimations:kSlideAnimationId context:NULL]; {
         [UIView setAnimationsEnabled:direction!=SLIDE_NONE];
-        [UIView setAnimationDuration:0.3];
+        [UIView setAnimationDuration:0.4];
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
         
