@@ -8,33 +8,33 @@
 
 @implementation NSDate (Convenience)
 
-- (NSInteger)year {
+- (int)year {
     NSCalendar *gregorian = [[NSCalendar alloc]
             initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [gregorian components:NSYearCalendarUnit fromDate:self];
-    return [components year];
+    return (unsigned int)[components year];
 }
 
 
-- (NSInteger)month {
+- (int)month {
     NSCalendar *gregorian = [[NSCalendar alloc]
             initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [gregorian components:NSMonthCalendarUnit fromDate:self];
-    return [components month];
+    return (unsigned int)[components month];
 }
 
-- (NSInteger)day {
+- (int)day {
     NSCalendar *gregorian = [[NSCalendar alloc]
             initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [gregorian components:NSDayCalendarUnit fromDate:self];
-    return [components day];
+    return (unsigned int)[components day];
 }
 
-- (NSInteger)hour {
+- (int)hour {
     NSCalendar *gregorian = [[NSCalendar alloc]
             initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [gregorian components:NSHourCalendarUnit fromDate:self];
-    return [components hour];
+    return (unsigned int)[components hour];
 }
 
 - (NSDate *)offsetDay:(int)numDays {
@@ -124,14 +124,14 @@
     return @"";
 }
 
-+ (NSInteger)dayBetweenStartDate:(NSDate *)startDate endDate:(NSDate *)endDate {
++ (int)dayBetweenStartDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     NSCalendar *calendar = [[NSCalendar alloc]
             initWithCalendarIdentifier:NSGregorianCalendar];
     unsigned int unitFlags = NSDayCalendarUnit;
     NSDateComponents *comps = [calendar components:unitFlags fromDate:startDate toDate:endDate options:0];
     //    int months = [comps month];
     NSInteger days = [comps day];
-    return days;
+    return (unsigned int)days;
 }
 
 + (NSDate *)dateFromString:(NSString *)dateString format:(NSString *)format {

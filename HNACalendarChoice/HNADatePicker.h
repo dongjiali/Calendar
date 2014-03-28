@@ -24,7 +24,6 @@ typedef void (^DatePieckerDoneBlock)(NSString *startDate,NSString *endDate);
 
 //初始化
 - (id)initWithSelectionMode:(HNASelectionMode)selectionMode dateType:(HNASelDateType)selectedDateType;
-- (void)showAndSelectDate:(NSDate *)date;
 //弹出显示日历
 - (void)showDatePickerView;
 //设置添加到父试图

@@ -36,7 +36,8 @@ extern const CGSize kTileSize;
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:fontSize];
     UIColor *textColor = nil;
     
-    CGContextSelectFont(ctx, [font.fontName cStringUsingEncoding:NSUTF8StringEncoding], fontSize, kCGEncodingMacRoman);
+//    CGContextSelectFont(ctx, [font.fontName cStringUsingEncoding:NSUTF8StringEncoding], fontSize, kCGEncodingMacRoman);
+    
     
     if (self.isDisable) {
         textColor = kGrayColor;
@@ -103,12 +104,13 @@ extern const CGSize kTileSize;
     
     NSUInteger n = [self.date day];
     NSString *dayText = [NSString stringWithFormat:@"%lu", (unsigned long)n];
-    CGSize textSize = [dayText sizeWithFont:font];
+//        CGSize textSize = [dayText sizeWithFont:font];
+    CGSize textSize = [dayText sizeWithAttributes:@{NSFontAttributeName:font}];
     CGFloat textX, textY;
     textX = roundf(0.5f * (kTileSize.width - textSize.width));
     textY = roundf(0.5f * (kTileSize.height - textSize.height));
-    [textColor setFill];
-    [dayText drawAtPoint:CGPointMake(textX, textY) withFont:font];
+//    [dayText drawAtPoint:CGPointMake(textX, textY) withFont:font];
+    [dayText drawAtPoint:CGPointMake(textX, textY) withAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:textColor}];
 }
 
 - (void)resetState
