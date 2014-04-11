@@ -31,7 +31,7 @@
         hnaDatePicker = [[HNADatePicker alloc] initWithSelectionMode:HNASelectionModeSingle dateType:HNASelDateTypeAirLine];
         hnaDatePicker.beginDate = [NSDate dateStartOfDay:[NSDate date]];
 #else
-        hnaDatePicker = [[HNADatePicker alloc] initWithSelectionMode:HNASelectionModeRange dateType:HNASelDateTypeHotle];
+        hnaDatePicker = [[HNADatePicker alloc] initWithSelectionMode:HNASelectionModeSingle dateType:HNASelDateTypeAirLine];
         //-> 多选时设置的开始时间和结束时间
         //    HNA.selectedDate = [NSDate dateStartOfDay:[NSDate date]];
         hnaDatePicker.beginDate = [NSDate dateStartOfDay:[NSDate date]];

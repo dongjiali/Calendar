@@ -113,6 +113,7 @@ static const CGFloat ContentViewHeight = 44 * 6;
     const CGFloat kMonthLabelWidth = 100.0f;
     const CGFloat kHeaderVerticalAdjust = 0.f;
     const CGFloat MonthLabelHeight = 44.0f;
+    const CGFloat tdonebuttonWidth = 80.f;
     // 绘制所选月集中和顶部的视图名称
     CGRect monthLabelFrame = CGRectMake((self.width - kMonthLabelWidth)/2,
                                         kHeaderVerticalAdjust,
@@ -125,6 +126,14 @@ static const CGFloat ContentViewHeight = 44 * 6;
     headerTitleLabel.textColor = kTextWhiteColor;
     [self setHeaderTitleText:[logic selectedMonthNameAndYear]];
     [headerView addSubview:headerTitleLabel];
+    
+    UIButton *dateDoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    dateDoneButton.frame = CGRectMake(self.width - tdonebuttonWidth, 0, tdonebuttonWidth, 44);
+    [dateDoneButton setTitle:@"完成" forState:UIControlStateNormal];
+    [dateDoneButton setTitleColor:kTextWhiteColor forState:UIControlStateNormal];
+    [dateDoneButton addTarget:self action:@selector(clinkButtonDateDone) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:dateDoneButton];
+    
     //add whith lin
     UIView *whiteLineView = [[UIView alloc]initWithFrame:CGRectMake(0, 43, self.width, 1)];
     whiteLineView.backgroundColor = kTextWhiteColor;
@@ -161,8 +170,6 @@ static const CGFloat ContentViewHeight = 44 * 6;
 
 - (void)addSubviewsToToolView:(UIView *)toolView
 {
-    
-    const CGFloat tdonebuttonWidth = 80.f;
     const CGFloat labelwidth = 90.f;
     const CGFloat tlabelHeight = 44;
     const CGFloat tlabelLeft = 10;
@@ -198,14 +205,6 @@ static const CGFloat ContentViewHeight = 44 * 6;
     endDateLabel.textColor = kDateLabelColor;
     endDateLabel.font = [UIFont systemFontOfSize:15];
     [toolView addSubview:endDateLabel];
-    
-    
-    UIButton *dateDoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    dateDoneButton.frame = CGRectMake(self.width - tdonebuttonWidth, 0, tdonebuttonWidth, 44);
-    [dateDoneButton setTitle:@"完成" forState:UIControlStateNormal];
-    [dateDoneButton setTitleColor:kGridRedColor forState:UIControlStateNormal];
-    [dateDoneButton addTarget:self action:@selector(clinkButtonDateDone) forControlEvents:UIControlEventTouchUpInside];
-    [toolView addSubview:dateDoneButton];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

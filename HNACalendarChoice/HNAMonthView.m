@@ -90,7 +90,7 @@ extern const CGSize kTileSize;
 
 - (NSMutableArray *)getVacationArray
 {
-    NSMutableArray *array = [NSMutableArray arrayWithObjects:@"2014-03-19",@"2014-03-21",@"2014-03-22", nil];
+    NSMutableArray *array = [NSMutableArray arrayWithObjects:@"2014-04-19",@"2014-04-21",@"2014-04-22", nil];
     return array;
 }
 

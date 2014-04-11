@@ -55,53 +55,44 @@ extern const CGSize kTileSize;
     }
     
     if (self.state == HNATileStateHighlighted || self.state == HNATileStateSelected) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_selected.png"];
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_selected"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
-        [image drawInRect:frame];
-        textColor = kTextWhiteColor;
+        textColor = kGridRedColor;
         if (self.isToday) {
-            image = [UIImage imageNamed:@"HNA_tile_selected_today.png"];
-            textColor = kGridRedColor;
+            image = [UIImage imageNamed:@"HNA_tile_today"];
         }
+        [image drawInRect:frame];
     } else if (self.state == HNATileStateLeftEnd) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_range_left.png"];
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_range_left"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         [image drawInRect:frame];
-        textColor = kTextWhiteColor;
-        if (self.isToday) {
-            image = [UIImage imageNamed:@"HNA_tile_range_left_today.png"];
-            textColor = kTextWhiteColor;
-        }
+        textColor = kGridRedColor;
     } else if (self.state == HNATileStateRightEnd) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_range_right.png"];
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_range_right"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         [image drawInRect:frame];
-        textColor = kTextWhiteColor;
-        if (self.isToday) {
-            image = [UIImage imageNamed:@"HNA_tile_range_right_today.png"];
-            textColor = kTextWhiteColor;
-        }
+        textColor = kGridRedColor;
     } else if (self.state == HNATileStateInRange) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_range.png"];
-        CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_range"];
+        CGRect frame = CGRectMake(0, 0, kTileSize.width, image.size.height);
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         textColor = kTextWhiteColor;
         [image drawInRect:frame];
     }
-    
     //判断是否为节假日
     if (self.isVacation) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_selected.png"];
+        UIImage *image = [UIImage imageNamed:@"HNA_tile_holiday"];
         CGRect frame = CGRectMake(0, 0, 10, 10);
         [image drawInRect:frame];
     }
-    
+
+
     NSUInteger n = [self.date day];
     NSString *dayText = [NSString stringWithFormat:@"%lu", (unsigned long)n];
 //        CGSize textSize = [dayText sizeWithFont:font];
@@ -111,6 +102,11 @@ extern const CGSize kTileSize;
     textY = roundf(0.5f * (kTileSize.height - textSize.height));
 //    [dayText drawAtPoint:CGPointMake(textX, textY) withFont:font];
     [dayText drawAtPoint:CGPointMake(textX, textY) withAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:textColor}];
+    
+    if (self.isToday) {
+        textColor = kGridRedColor;
+        [@"今" drawAtPoint:CGPointMake(0, 0) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:textColor}];
+    }
 }
 
 - (void)resetState

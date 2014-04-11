@@ -32,13 +32,12 @@
 		CDA9D77C18D1862D00A45D5E /* NSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9D77718D1862D00A45D5E /* NSDateAdditions.m */; };
 		CDA9D77D18D1862D00A45D5E /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9D77918D1862D00A45D5E /* UIViewAdditions.m */; };
 		CDA9D77E18D1862D00A45D5E /* NSDate+Convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9D77B18D1862D00A45D5E /* NSDate+Convenience.m */; };
-		CDC9F2D118D7D5C0003580E1 /* HNA_tile_range_left.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2C918D7D5C0003580E1 /* HNA_tile_range_left.png */; };
+		CDAE91AD18F68F1D00F5C469 /* HNA_tile_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAE91AB18F68F1D00F5C469 /* HNA_tile_down@2x.png */; };
+		CDAE91AE18F68F1D00F5C469 /* HNA_tile_holiday@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAE91AC18F68F1D00F5C469 /* HNA_tile_holiday@2x.png */; };
+		CDAE91B018F69A1200F5C469 /* HNA_tile_today@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAE91AF18F69A1200F5C469 /* HNA_tile_today@2x.png */; };
 		CDC9F2D218D7D5C0003580E1 /* HNA_tile_range_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2CA18D7D5C0003580E1 /* HNA_tile_range_left@2x.png */; };
-		CDC9F2D318D7D5C0003580E1 /* HNA_tile_range_right.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2CB18D7D5C0003580E1 /* HNA_tile_range_right.png */; };
 		CDC9F2D418D7D5C0003580E1 /* HNA_tile_range_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2CC18D7D5C0003580E1 /* HNA_tile_range_right@2x.png */; };
-		CDC9F2D518D7D5C0003580E1 /* HNA_tile_range.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2CD18D7D5C0003580E1 /* HNA_tile_range.png */; };
 		CDC9F2D618D7D5C0003580E1 /* HNA_tile_range@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2CE18D7D5C0003580E1 /* HNA_tile_range@2x.png */; };
-		CDC9F2D718D7D5C0003580E1 /* HNA_tile_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2CF18D7D5C0003580E1 /* HNA_tile_selected.png */; };
 		CDC9F2D818D7D5C0003580E1 /* HNA_tile_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2D018D7D5C0003580E1 /* HNA_tile_selected@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -92,13 +91,12 @@
 		CDA9D77918D1862D00A45D5E /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		CDA9D77A18D1862D00A45D5E /* NSDate+Convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Convenience.h"; sourceTree = "<group>"; };
 		CDA9D77B18D1862D00A45D5E /* NSDate+Convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Convenience.m"; sourceTree = "<group>"; };
-		CDC9F2C918D7D5C0003580E1 /* HNA_tile_range_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HNA_tile_range_left.png; sourceTree = "<group>"; };
+		CDAE91AB18F68F1D00F5C469 /* HNA_tile_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_down@2x.png"; sourceTree = "<group>"; };
+		CDAE91AC18F68F1D00F5C469 /* HNA_tile_holiday@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_holiday@2x.png"; sourceTree = "<group>"; };
+		CDAE91AF18F69A1200F5C469 /* HNA_tile_today@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_today@2x.png"; sourceTree = "<group>"; };
 		CDC9F2CA18D7D5C0003580E1 /* HNA_tile_range_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_range_left@2x.png"; sourceTree = "<group>"; };
-		CDC9F2CB18D7D5C0003580E1 /* HNA_tile_range_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HNA_tile_range_right.png; sourceTree = "<group>"; };
 		CDC9F2CC18D7D5C0003580E1 /* HNA_tile_range_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_range_right@2x.png"; sourceTree = "<group>"; };
-		CDC9F2CD18D7D5C0003580E1 /* HNA_tile_range.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HNA_tile_range.png; sourceTree = "<group>"; };
 		CDC9F2CE18D7D5C0003580E1 /* HNA_tile_range@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_range@2x.png"; sourceTree = "<group>"; };
-		CDC9F2CF18D7D5C0003580E1 /* HNA_tile_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HNA_tile_selected.png; sourceTree = "<group>"; };
 		CDC9F2D018D7D5C0003580E1 /* HNA_tile_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_selected@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,13 +248,12 @@
 		CDC9F2C818D7D5B2003580E1 /* image */ = {
 			isa = PBXGroup;
 			children = (
-				CDC9F2C918D7D5C0003580E1 /* HNA_tile_range_left.png */,
+				CDAE91AF18F69A1200F5C469 /* HNA_tile_today@2x.png */,
+				CDAE91AB18F68F1D00F5C469 /* HNA_tile_down@2x.png */,
+				CDAE91AC18F68F1D00F5C469 /* HNA_tile_holiday@2x.png */,
 				CDC9F2CA18D7D5C0003580E1 /* HNA_tile_range_left@2x.png */,
-				CDC9F2CB18D7D5C0003580E1 /* HNA_tile_range_right.png */,
 				CDC9F2CC18D7D5C0003580E1 /* HNA_tile_range_right@2x.png */,
-				CDC9F2CD18D7D5C0003580E1 /* HNA_tile_range.png */,
 				CDC9F2CE18D7D5C0003580E1 /* HNA_tile_range@2x.png */,
-				CDC9F2CF18D7D5C0003580E1 /* HNA_tile_selected.png */,
 				CDC9F2D018D7D5C0003580E1 /* HNA_tile_selected@2x.png */,
 			);
 			name = image;
@@ -338,15 +335,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDA9D6FE18D1812100A45D5E /* InfoPlist.strings in Resources */,
-				CDC9F2D718D7D5C0003580E1 /* HNA_tile_selected.png in Resources */,
 				CDC9F2D818D7D5C0003580E1 /* HNA_tile_selected@2x.png in Resources */,
 				CDA9D70618D1812100A45D5E /* Images.xcassets in Resources */,
 				CDC9F2D218D7D5C0003580E1 /* HNA_tile_range_left@2x.png in Resources */,
+				CDAE91B018F69A1200F5C469 /* HNA_tile_today@2x.png in Resources */,
+				CDAE91AD18F68F1D00F5C469 /* HNA_tile_down@2x.png in Resources */,
+				CDAE91AE18F68F1D00F5C469 /* HNA_tile_holiday@2x.png in Resources */,
 				CDC9F2D618D7D5C0003580E1 /* HNA_tile_range@2x.png in Resources */,
-				CDC9F2D318D7D5C0003580E1 /* HNA_tile_range_right.png in Resources */,
 				CDC9F2D418D7D5C0003580E1 /* HNA_tile_range_right@2x.png in Resources */,
-				CDC9F2D118D7D5C0003580E1 /* HNA_tile_range_left.png in Resources */,
-				CDC9F2D518D7D5C0003580E1 /* HNA_tile_range.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,8 +430,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: LI LEI (33ZZ8SWCD6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI LEI (33ZZ8SWCD6)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -451,9 +447,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A795B9E1-17FA-4BE9-AF1C-608B77BD6CB2";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -474,8 +470,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: LI LEI (33ZZ8SWCD6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI LEI (33ZZ8SWCD6)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -485,8 +481,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PROVISIONING_PROFILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PROVISIONING_PROFILE = "A795B9E1-17FA-4BE9-AF1C-608B77BD6CB2";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -497,17 +493,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: LI LEI (33ZZ8SWCD6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HNACalendarChoice/HNACalendarChoice-Prefix.pch";
 				INFOPLIST_FILE = "HNACalendarChoice/HNACalendarChoice-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HNACalendarChoice",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A795B9E1-17FA-4BE9-AF1C-608B77BD6CB2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -517,18 +513,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: LI LEI (33ZZ8SWCD6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI LEI (33ZZ8SWCD6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HNACalendarChoice/HNACalendarChoice-Prefix.pch";
 				INFOPLIST_FILE = "HNACalendarChoice/HNACalendarChoice-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HNACalendarChoice",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A795B9E1-17FA-4BE9-AF1C-608B77BD6CB2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
