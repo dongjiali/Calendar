@@ -30,9 +30,9 @@
 }
 @end
 
-static const CGFloat HeaderHeight = 64.f;
-static const CGFloat ToolHeight = 44.f;
-static const CGFloat ContentViewHeight = 44 * 6;
+const CGFloat HeaderHeight = 64.f;
+const CGFloat ToolHeight = 44.f;
+const CGFloat ContentViewHeight = 44 * 6;
 @implementation HNADateView
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<HNAViewDelegate>)theDelegate logic:(HNALogic *)theLogic
@@ -62,7 +62,7 @@ static const CGFloat ContentViewHeight = 44 * 6;
         [self addSubviewsToContentView:contentView];
         [self addSubview:contentView];
         
-        CGRect toolViewframe = CGRectMake(0, screenHeight - ToolHeight, self.width, ToolHeight + 10);
+        CGRect toolViewframe = CGRectMake(0, screenHeight - ToolHeight + 1, self.width, ToolHeight + 10);
         UIView *toolView = [[UIView alloc]initWithFrame:toolViewframe];
         toolView.backgroundColor = kbackgroundGrayClor;
         [self addSubviewsToToolView:toolView];
@@ -141,8 +141,8 @@ static const CGFloat ContentViewHeight = 44 * 6;
 
     // 添加列标签为每个工作日调整基于当前语言环境的第一个工作日
     NSArray *weekdayNames = [[[NSDateFormatter alloc] init] veryShortStandaloneWeekdaySymbols];
-    static CGFloat width = 46.0f;
-    static CGFloat height = 20.0f;
+    CGFloat width = kGridViewWidth;
+    CGFloat height = 20.0f;
     for (int i = 0 ;i < 7 ;i++) {
         CGRect weekdayFrame = CGRectMake(i * (width), 44, width, height);
         UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:weekdayFrame];
@@ -152,6 +152,10 @@ static const CGFloat ContentViewHeight = 44 * 6;
         weekdayLabel.textColor = kTextWhiteColor;
         weekdayLabel.text = [weekdayNames objectAtIndex:i];
         [headerView addSubview:weekdayLabel];
+        
+        UIView *linView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1, height)];
+        linView.backgroundColor = KTintLineColor;
+        [weekdayLabel addSubview:linView];
     }
 }
 

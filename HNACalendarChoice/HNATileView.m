@@ -54,6 +54,15 @@ extern const CGSize kTileSize;
         }
     }
     
+    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 2.0);  //线宽
+    CGContextSetAllowsAntialiasing(UIGraphicsGetCurrentContext(), YES);
+    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 200.0/255, 199.0/255,205.0/255.0, 1.0);  //颜色
+    CGContextBeginPath(UIGraphicsGetCurrentContext());
+    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), 0, 0);  //起点坐标
+    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), 0, kTileSize.height);   //终点坐标
+    CGContextStrokePath(UIGraphicsGetCurrentContext());
+    UIGraphicsEndImageContext();
+
     if (self.state == HNATileStateHighlighted || self.state == HNATileStateSelected) {
         UIImage *image = [UIImage imageNamed:@"HNA_tile_selected"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);

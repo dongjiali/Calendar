@@ -11,6 +11,8 @@
 #define RGBCOLOR(R,G,B) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1]
 #define RGBACOLOR(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
 
+#define kGridViewWidth 46.0f
+#define kGridViewHeight 44.0f
 //#define kBackgroundColor     RGBCOLOR(206, 34, 34)    //背景色
 
 #define kGridRedColor        RGBCOLOR(218, 56, 43)      //深红     ---所有红
