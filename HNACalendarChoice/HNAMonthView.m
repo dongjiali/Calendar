@@ -6,13 +6,11 @@
 //  Copyright (c) 2014年 HNACalendarChoice. All rights reserved.
 //
 
-#import "HNAMonthView.h"
 #import <CoreGraphics/CoreGraphics.h>
 #import "HNAMonthView.h"
 #import "HNATileView.h"
 #import "HNADateView.h"
-#import "UIViewAdditions.h"
-#import "NSDateAdditions.h"
+#import "Hna_datapicker.h"
 
 extern const CGSize kTileSize;
 
@@ -31,7 +29,7 @@ extern const CGSize kTileSize;
         self.clipsToBounds = YES;
         for (int i=0; i<6; i++) {
             for (int j=0; j<7; j++) {
-                CGRect r = CGRectMake(j* (kTileSize.width), i* (kTileSize.height + 1), kTileSize.width, kTileSize.height);
+                CGRect r = CGRectMake(j* (kTileSize.width), i* (kTileSize.height + 0.5), kTileSize.width, kTileSize.height);
                  HNATileView *tileview = [[HNATileView alloc] initWithFrame:r];
                 [self addSubview:tileview];
             }
@@ -90,7 +88,7 @@ extern const CGSize kTileSize;
 
 - (NSMutableArray *)getVacationArray
 {
-    NSMutableArray *array = [NSMutableArray arrayWithObjects:@"2014-04-19",@"2014-04-21",@"2014-04-22", nil];
+     NSMutableArray *array = [NSMutableArray arrayWithObjects:@"2014-04-18",@"2014-04-19",@"2014-04-21",@"2014-04-22", nil];
     return array;
 }
 

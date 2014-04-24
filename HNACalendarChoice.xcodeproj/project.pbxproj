@@ -14,6 +14,7 @@
 		CD26314D18DAC5F700BEAFE8 /* HNAMonthView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD26314C18DAC5F700BEAFE8 /* HNAMonthView.m */; };
 		CD26315018DAC63A00BEAFE8 /* HNALogic.m in Sources */ = {isa = PBXBuildFile; fileRef = CD26314F18DAC63A00BEAFE8 /* HNALogic.m */; };
 		CD26315318DAC6BC00BEAFE8 /* HNAGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD26315218DAC6BC00BEAFE8 /* HNAGridView.m */; };
+		CD9192541908DDD500F85A2E /* DateImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD9192521908DDD500F85A2E /* DateImage.bundle */; };
 		CDA9D6F418D1812100A45D5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9D6F318D1812100A45D5E /* Foundation.framework */; };
 		CDA9D6F618D1812100A45D5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9D6F518D1812100A45D5E /* CoreGraphics.framework */; };
 		CDA9D6F818D1812100A45D5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9D6F718D1812100A45D5E /* UIKit.framework */; };
@@ -32,13 +33,6 @@
 		CDA9D77C18D1862D00A45D5E /* NSDateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9D77718D1862D00A45D5E /* NSDateAdditions.m */; };
 		CDA9D77D18D1862D00A45D5E /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9D77918D1862D00A45D5E /* UIViewAdditions.m */; };
 		CDA9D77E18D1862D00A45D5E /* NSDate+Convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9D77B18D1862D00A45D5E /* NSDate+Convenience.m */; };
-		CDAE91AD18F68F1D00F5C469 /* HNA_tile_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAE91AB18F68F1D00F5C469 /* HNA_tile_down@2x.png */; };
-		CDAE91AE18F68F1D00F5C469 /* HNA_tile_holiday@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAE91AC18F68F1D00F5C469 /* HNA_tile_holiday@2x.png */; };
-		CDAE91B018F69A1200F5C469 /* HNA_tile_today@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAE91AF18F69A1200F5C469 /* HNA_tile_today@2x.png */; };
-		CDC9F2D218D7D5C0003580E1 /* HNA_tile_range_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2CA18D7D5C0003580E1 /* HNA_tile_range_left@2x.png */; };
-		CDC9F2D418D7D5C0003580E1 /* HNA_tile_range_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2CC18D7D5C0003580E1 /* HNA_tile_range_right@2x.png */; };
-		CDC9F2D618D7D5C0003580E1 /* HNA_tile_range@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2CE18D7D5C0003580E1 /* HNA_tile_range@2x.png */; };
-		CDC9F2D818D7D5C0003580E1 /* HNA_tile_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDC9F2D018D7D5C0003580E1 /* HNA_tile_selected@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +60,8 @@
 		CD26314F18DAC63A00BEAFE8 /* HNALogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNALogic.m; sourceTree = "<group>"; };
 		CD26315118DAC6BC00BEAFE8 /* HNAGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNAGridView.h; sourceTree = "<group>"; };
 		CD26315218DAC6BC00BEAFE8 /* HNAGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNAGridView.m; sourceTree = "<group>"; };
+		CD9192521908DDD500F85A2E /* DateImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DateImage.bundle; sourceTree = "<group>"; };
+		CD9192531908DDD500F85A2E /* Hna_datapicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hna_datapicker.h; sourceTree = "<group>"; };
 		CDA9D6F018D1812100A45D5E /* HNACalendarChoice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HNACalendarChoice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDA9D6F318D1812100A45D5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CDA9D6F518D1812100A45D5E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,13 +87,6 @@
 		CDA9D77918D1862D00A45D5E /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		CDA9D77A18D1862D00A45D5E /* NSDate+Convenience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Convenience.h"; sourceTree = "<group>"; };
 		CDA9D77B18D1862D00A45D5E /* NSDate+Convenience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Convenience.m"; sourceTree = "<group>"; };
-		CDAE91AB18F68F1D00F5C469 /* HNA_tile_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_down@2x.png"; sourceTree = "<group>"; };
-		CDAE91AC18F68F1D00F5C469 /* HNA_tile_holiday@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_holiday@2x.png"; sourceTree = "<group>"; };
-		CDAE91AF18F69A1200F5C469 /* HNA_tile_today@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_today@2x.png"; sourceTree = "<group>"; };
-		CDC9F2CA18D7D5C0003580E1 /* HNA_tile_range_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_range_left@2x.png"; sourceTree = "<group>"; };
-		CDC9F2CC18D7D5C0003580E1 /* HNA_tile_range_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_range_right@2x.png"; sourceTree = "<group>"; };
-		CDC9F2CE18D7D5C0003580E1 /* HNA_tile_range@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_range@2x.png"; sourceTree = "<group>"; };
-		CDC9F2D018D7D5C0003580E1 /* HNA_tile_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HNA_tile_selected@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +119,8 @@
 		CD26314118DAC40500BEAFE8 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
+				CD9192521908DDD500F85A2E /* DateImage.bundle */,
+				CD9192531908DDD500F85A2E /* Hna_datapicker.h */,
 				CD26314218DAC42300BEAFE8 /* HNADatePicker.h */,
 				CD26314318DAC42300BEAFE8 /* HNADatePicker.m */,
 				CD26314518DAC4EE00BEAFE8 /* HNADateView.h */,
@@ -226,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				CD26314118DAC40500BEAFE8 /* New Group */,
-				CDC9F2C818D7D5B2003580E1 /* image */,
 				CDA9D72418D182EC00A45D5E /* Additions */,
 			);
 			name = HNADatePicker;
@@ -243,20 +233,6 @@
 				CDA9D77B18D1862D00A45D5E /* NSDate+Convenience.m */,
 			);
 			name = Additions;
-			sourceTree = "<group>";
-		};
-		CDC9F2C818D7D5B2003580E1 /* image */ = {
-			isa = PBXGroup;
-			children = (
-				CDAE91AF18F69A1200F5C469 /* HNA_tile_today@2x.png */,
-				CDAE91AB18F68F1D00F5C469 /* HNA_tile_down@2x.png */,
-				CDAE91AC18F68F1D00F5C469 /* HNA_tile_holiday@2x.png */,
-				CDC9F2CA18D7D5C0003580E1 /* HNA_tile_range_left@2x.png */,
-				CDC9F2CC18D7D5C0003580E1 /* HNA_tile_range_right@2x.png */,
-				CDC9F2CE18D7D5C0003580E1 /* HNA_tile_range@2x.png */,
-				CDC9F2D018D7D5C0003580E1 /* HNA_tile_selected@2x.png */,
-			);
-			name = image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,14 +311,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDA9D6FE18D1812100A45D5E /* InfoPlist.strings in Resources */,
-				CDC9F2D818D7D5C0003580E1 /* HNA_tile_selected@2x.png in Resources */,
 				CDA9D70618D1812100A45D5E /* Images.xcassets in Resources */,
-				CDC9F2D218D7D5C0003580E1 /* HNA_tile_range_left@2x.png in Resources */,
-				CDAE91B018F69A1200F5C469 /* HNA_tile_today@2x.png in Resources */,
-				CDAE91AD18F68F1D00F5C469 /* HNA_tile_down@2x.png in Resources */,
-				CDAE91AE18F68F1D00F5C469 /* HNA_tile_holiday@2x.png in Resources */,
-				CDC9F2D618D7D5C0003580E1 /* HNA_tile_range@2x.png in Resources */,
-				CDC9F2D418D7D5C0003580E1 /* HNA_tile_range_right@2x.png in Resources */,
+				CD9192541908DDD500F85A2E /* DateImage.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

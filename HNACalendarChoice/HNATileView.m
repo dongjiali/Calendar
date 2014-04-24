@@ -7,8 +7,7 @@
 //
 
 #import "HNATileView.h"
-#import "UIViewAdditions.h"
-#import "NSDateAdditions.h"
+#import "Hna_datapicker.h"
 #import <CoreText/CoreText.h>
 
 extern const CGSize kTileSize;
@@ -19,7 +18,7 @@ extern const CGSize kTileSize;
 {
     if ((self = [super initWithFrame:frame])) {
         self.opaque = NO;
-        self.backgroundColor = kTextWhiteColor;
+        self.backgroundColor = HTextWhiteColor;
         self.clipsToBounds = NO;
         origin = frame.origin;
         [self setIsAccessibilityElement:YES];
@@ -36,25 +35,23 @@ extern const CGSize kTileSize;
     UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:fontSize];
     UIColor *textColor = nil;
     
-//    CGContextSelectFont(ctx, [font.fontName cStringUsingEncoding:NSUTF8StringEncoding], fontSize, kCGEncodingMacRoman);
-    
-    
     if (self.isDisable) {
-        textColor = kGrayColor;
+        textColor = HGrayColor;
     } else if (self.belongsToAdjacentMonth) {
         //-> 其它月份的字的背景色
-        [kbackgroundGrayClor setFill];
+        [HTextWhiteColor setFill];
         CGContextFillRect(ctx, CGRectMake(0.f, 0.f, kTileSize.width, kTileSize.height));
-        textColor = kGrayColor;
+        
+        textColor = HGrayColor;
     } else {
-        textColor = kDarkGrayColor;
+        textColor = HDarkGrayColor;
         if (self.isToday)
         {
-            textColor = kGridRedColor;
+            textColor = HGridRedColor;
         }
     }
-    
-    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 2.0);  //线宽
+    //画线
+    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 1.0);  //线宽
     CGContextSetAllowsAntialiasing(UIGraphicsGetCurrentContext(), YES);
     CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 200.0/255, 199.0/255,205.0/255.0, 1.0);  //颜色
     CGContextBeginPath(UIGraphicsGetCurrentContext());
@@ -62,59 +59,58 @@ extern const CGSize kTileSize;
     CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), 0, kTileSize.height);   //终点坐标
     CGContextStrokePath(UIGraphicsGetCurrentContext());
     UIGraphicsEndImageContext();
-
+    
     if (self.state == HNATileStateHighlighted || self.state == HNATileStateSelected) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_selected"];
+        UIImage *image = [UIImage imageNamed:@"DateImage.bundle/HNA_tile_selected"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
-        textColor = kGridRedColor;
+        [image drawInRect:frame];
+        textColor = HGridRedColor;
         if (self.isToday) {
-            image = [UIImage imageNamed:@"HNA_tile_today"];
+            image = [UIImage imageNamed:@"DateImage.bundle/HNA_tile_today"];
+            textColor = HGridRedColor;
         }
-        [image drawInRect:frame];
     } else if (self.state == HNATileStateLeftEnd) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_range_left"];
+        UIImage *image = [UIImage imageNamed:@"DateImage.bundle/HNA_tile_range_left"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         [image drawInRect:frame];
-        textColor = kGridRedColor;
+        textColor = HGridRedColor;
     } else if (self.state == HNATileStateRightEnd) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_range_right"];
+        UIImage *image = [UIImage imageNamed:@"DateImage.bundle/HNA_tile_range_right"];
         CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.x = (kTileSize.width - frame.size.width) / 2;
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
         [image drawInRect:frame];
-        textColor = kGridRedColor;
+        textColor = HGridRedColor;
     } else if (self.state == HNATileStateInRange) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_range"];
-        CGRect frame = CGRectMake(0, 0, kTileSize.width, image.size.height);
+        UIImage *image = [UIImage imageNamed:@"DateImage.bundle/HNA_tile_range"];
+        CGRect frame = CGRectMake(0, 0, image.size.width, image.size.height);
         frame.origin.y = (kTileSize.height - frame.size.height) / 2;
-        textColor = kTextWhiteColor;
+        textColor = HTextWhiteColor;
         [image drawInRect:frame];
     }
+    
     //判断是否为节假日
-    if (self.isVacation) {
-        UIImage *image = [UIImage imageNamed:@"HNA_tile_holiday"];
-        CGRect frame = CGRectMake(0, 0, 10, 10);
+    if (self.isVacation && !self.isToday) {
+        UIImage *image = [UIImage imageNamed:@"DateImage.bundle/HNA_tile_holiday"];
+        CGRect frame = CGRectMake(2, 0, 10, 10);
         [image drawInRect:frame];
     }
-
-
+    
     NSUInteger n = [self.date day];
     NSString *dayText = [NSString stringWithFormat:@"%lu", (unsigned long)n];
-//        CGSize textSize = [dayText sizeWithFont:font];
     CGSize textSize = [dayText sizeWithAttributes:@{NSFontAttributeName:font}];
     CGFloat textX, textY;
     textX = roundf(0.5f * (kTileSize.width - textSize.width));
     textY = roundf(0.5f * (kTileSize.height - textSize.height));
-//    [dayText drawAtPoint:CGPointMake(textX, textY) withFont:font];
     [dayText drawAtPoint:CGPointMake(textX, textY) withAttributes:@{NSFontAttributeName:font,NSForegroundColorAttributeName:textColor}];
     
     if (self.isToday) {
-        textColor = kGridRedColor;
-        [@"今" drawAtPoint:CGPointMake(0, 0) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:textColor}];
+        textColor = HGridRedColor;
+        [@"今" drawAtPoint:CGPointMake(2, 0) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:textColor}];
     }
 }
 

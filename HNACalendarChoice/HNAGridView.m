@@ -6,23 +6,20 @@
 //  Copyright (c) 2014年 HNACalendarChoice. All rights reserved.
 //
 
-#import "HNAGridView.h"
 
 #import <CoreGraphics/CoreGraphics.h>
-
 #import "HNAGridView.h"
 #import "HNADateView.h"
 #import "HNAMonthView.h"
 #import "HNATileView.h"
 #import "HNALogic.h"
-#import "UIViewAdditions.h"
-#import "NSDateAdditions.h"
+#import "Hna_datapicker.h"
 
 #define SLIDE_NONE 0
 #define SLIDE_UP 1
 #define SLIDE_DOWN 2
 
-const CGSize kTileSize = { kGridViewWidth, kGridViewHeight };
+const CGSize kTileSize = { HGridViewWidth, HGridViewHeight };
 
 static NSString *kSlideAnimationId = @"HNASwitchMonths";
 

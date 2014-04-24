@@ -11,6 +11,7 @@
 #import "HNAGridView.h"
 #import "HNALogic.h"
 #import "UIViewAdditions.h"
+#import "Hna_datapicker.h"
 #import "NSDateAdditions.h"
 
 @interface HNADateView ()
@@ -21,7 +22,7 @@
     NSMutableArray *jumpArray;
     UILabel *datelabel;
     UILabel *datelableling;
-
+    
     UILabel *headerTitleLabel;
     UILabel *beginDateLabel;
     UILabel *endDateLabel;
@@ -30,7 +31,7 @@
 }
 @end
 
-const CGFloat HeaderHeight = 64.f;
+const CGFloat HeaderHeight = 74.f;
 const CGFloat ToolHeight = 44.f;
 const CGFloat ContentViewHeight = 44 * 6;
 @implementation HNADateView
@@ -50,21 +51,21 @@ const CGFloat ContentViewHeight = 44 * 6;
         
         CGRect headerViewframe = CGRectMake(0, screenHeight - (HeaderHeight + ToolHeight) - ContentViewHeight, self.width, HeaderHeight);
         selfheaderView = [[UIView alloc] initWithFrame:headerViewframe];
-        selfheaderView.backgroundColor = kGridRedColor;
+        selfheaderView.backgroundColor = HGridRedColor;
         selfheaderView.layer.cornerRadius = 5.0;
         [self addSubviewsToHeaderView:selfheaderView];
         [self addSubview:selfheaderView];
         
         CGRect contentViewframe = CGRectMake(0, screenHeight - ToolHeight - ContentViewHeight, self.width, ContentViewHeight);
         UIView *contentView = [[UIView alloc] initWithFrame:contentViewframe];
-        contentView.backgroundColor = KTintLineColor;
+        contentView.backgroundColor = HTintLineColor;
         contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         [self addSubviewsToContentView:contentView];
         [self addSubview:contentView];
         
         CGRect toolViewframe = CGRectMake(0, screenHeight - ToolHeight + 1, self.width, ToolHeight + 10);
         UIView *toolView = [[UIView alloc]initWithFrame:toolViewframe];
-        toolView.backgroundColor = kbackgroundGrayClor;
+        toolView.backgroundColor = HbackgroundGrayColor;
         [self addSubviewsToToolView:toolView];
         [self addSubview:toolView];
     }
@@ -123,49 +124,51 @@ const CGFloat ContentViewHeight = 44 * 6;
     headerTitleLabel.backgroundColor = [UIColor clearColor];
     headerTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:22];
     headerTitleLabel.textAlignment = NSTextAlignmentCenter;
-    headerTitleLabel.textColor = kTextWhiteColor;
+    headerTitleLabel.textColor = HTextWhiteColor;
     [self setHeaderTitleText:[logic selectedMonthNameAndYear]];
     [headerView addSubview:headerTitleLabel];
     
     UIButton *dateDoneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     dateDoneButton.frame = CGRectMake(self.width - tdonebuttonWidth, 0, tdonebuttonWidth, 44);
     [dateDoneButton setTitle:@"完成" forState:UIControlStateNormal];
-    [dateDoneButton setTitleColor:kTextWhiteColor forState:UIControlStateNormal];
+    [dateDoneButton setTitleColor:HTextWhiteColor forState:UIControlStateNormal];
     [dateDoneButton addTarget:self action:@selector(clinkButtonDateDone) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:dateDoneButton];
     
     //add whith lin
     UIView *whiteLineView = [[UIView alloc]initWithFrame:CGRectMake(0, 43, self.width, 1)];
-    whiteLineView.backgroundColor = kTextWhiteColor;
+    whiteLineView.backgroundColor = HTextWhiteColor;
     [headerView addSubview:whiteLineView];
-
+    
     // 添加列标签为每个工作日调整基于当前语言环境的第一个工作日
     NSArray *weekdayNames = [[[NSDateFormatter alloc] init] veryShortStandaloneWeekdaySymbols];
-    CGFloat width = kGridViewWidth;
-    CGFloat height = 20.0f;
+    CGFloat width = HGridViewWidth;
+    CGFloat height = 30.0f;
     for (int i = 0 ;i < 7 ;i++) {
         CGRect weekdayFrame = CGRectMake(i * (width), 44, width, height);
         UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:weekdayFrame];
-        weekdayLabel.backgroundColor = kWeekLabel;
+        weekdayLabel.backgroundColor = HWeekBackGroundColor;
         weekdayLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
         weekdayLabel.textAlignment = NSTextAlignmentCenter;
-        weekdayLabel.textColor = kTextWhiteColor;
+        weekdayLabel.textColor = HTextWhiteColor;
         weekdayLabel.text = [weekdayNames objectAtIndex:i];
         [headerView addSubview:weekdayLabel];
         
+        if(i>0){
         UIView *linView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 1, height)];
-        linView.backgroundColor = KTintLineColor;
+        linView.backgroundColor = HTintLineColor;
         [weekdayLabel addSubview:linView];
+        }
     }
 }
 
 - (void)addSubviewsToContentView:(UIView *)contentView
 {
-
+    
     CGRect fullWidthAutomaticLayoutFrame = CGRectMake(0.f, 0.f, self.width, 0.f);
     
     self.gridView = [[HNAGridView alloc] initWithFrame:fullWidthAutomaticLayoutFrame logic:logic delegate:self.delegate];
-
+    
     [self.gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
     [contentView addSubview:self.gridView];
     
@@ -177,20 +180,20 @@ const CGFloat ContentViewHeight = 44 * 6;
     const CGFloat labelwidth = 90.f;
     const CGFloat tlabelHeight = 44;
     const CGFloat tlabelLeft = 10;
-    const CGFloat tdatelabelwidth = 85;
+    const CGFloat tdatelabelwidth = 95;
     
     UIView *topLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.width, 1.5)];
-    topLine.backgroundColor = KDarkLineColor;
+    topLine.backgroundColor = HDarkLineColor;
     [toolView addSubview:topLine];
     
     //显示去返程标签
     datelabel = [[UILabel alloc]initWithFrame:CGRectMake(tlabelLeft, 0, labelwidth, tlabelHeight)];
-    datelabel.textColor = kDarkGrayColor;
+    datelabel.textColor = HDarkGrayColor;
     datelabel.font = [UIFont systemFontOfSize:14];
     [toolView addSubview:datelabel];
     //显示 -
-    datelableling = [[UILabel alloc]initWithFrame:CGRectMake(155, 0, 5, tlabelHeight)];
-    datelableling.textColor = kDateLabelColor;
+    datelableling = [[UILabel alloc]initWithFrame:CGRectMake(170, 0, 5, tlabelHeight)];
+    datelableling.textColor = HDateLabelColor;
     datelableling.textAlignment = NSTextAlignmentCenter;
     datelableling.text = @"-";
     datelableling.hidden = YES;
@@ -199,15 +202,15 @@ const CGFloat ContentViewHeight = 44 * 6;
     //去程时间日期label
     beginDateLabel = [[UILabel alloc]initWithFrame:CGRectMake(75, 1, tdatelabelwidth, tlabelHeight)];
     beginDateLabel.textAlignment = NSTextAlignmentLeft;
-    beginDateLabel.textColor = kDateLabelColor;
-    beginDateLabel.font = [UIFont systemFontOfSize:15];
+    beginDateLabel.textColor = HDateLabelColor;
+    beginDateLabel.font = [UIFont systemFontOfSize:17];
     [toolView addSubview:beginDateLabel];
     
     //回程时间日期label
-    endDateLabel = [[UILabel alloc]initWithFrame:CGRectMake(165, 1, tdatelabelwidth, tlabelHeight)];
+    endDateLabel = [[UILabel alloc]initWithFrame:CGRectMake(180, 1, tdatelabelwidth, tlabelHeight)];
     endDateLabel.textAlignment = NSTextAlignmentLeft;
-    endDateLabel.textColor = kDateLabelColor;
-    endDateLabel.font = [UIFont systemFontOfSize:15];
+    endDateLabel.textColor = HDateLabelColor;
+    endDateLabel.font = [UIFont systemFontOfSize:17];
     [toolView addSubview:endDateLabel];
 }
 
@@ -247,7 +250,7 @@ const CGFloat ContentViewHeight = 44 * 6;
 {
     endDateLabel.text = endDateLabelText;
     if(endDateLabelText.length >0)
-    datelableling.hidden = NO;
+        datelableling.hidden = NO;
 }
 
 - (void)jumpToSelectedMonth { [self.gridView jumpToSelectedMonth]; }
@@ -298,10 +301,10 @@ const CGFloat ContentViewHeight = 44 * 6;
                 NSArray *textArray = [string componentsSeparatedByString:@"."];
                 UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
                 button.frame = CGRectMake(i%3 * self.width/3, i/3 * 60, self.width/3, 60);
-                button.layer.borderColor = KTintLineColor.CGColor;
+                button.layer.borderColor = HTintLineColor.CGColor;
                 button.layer.borderWidth = 0.5;
                 button.titleLabel.font = [UIFont boldSystemFontOfSize:40];
-                [button setTitleColor:kDarkGrayColor forState:0];
+                [button setTitleColor:HDarkGrayColor forState:0];
                 [button setTitle:[NSString stringWithFormat:@"%d",[textArray[1] intValue]] forState:0];
                 button.tag = i;
                 [monthSelectView addSubview:button];
@@ -358,7 +361,7 @@ const CGFloat ContentViewHeight = 44 * 6;
 
 - (NSString *)changeDateType:(NSDate *)date
 {
-    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init]; 
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy.MM"];
     return [dateFormat stringFromDate:date];
 }
